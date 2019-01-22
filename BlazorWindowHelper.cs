@@ -22,7 +22,6 @@ namespace BlazorWindowHelper
             OnKeyUp?.Invoke(consoleKey);
         }
 
-
         [JSInvokable]
         public static void InvokeOnScroll()
         {
