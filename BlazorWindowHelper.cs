@@ -11,12 +11,10 @@ namespace BlazorWindowHelper
         public static Action<ConsoleKey> OnKeyUp { get; set; }
         public static Action OnScroll { get; set; }
         public static Action OnResize { get; set; }
-       // public static Action<string> OnUrlChange { get; set; }
-
+       
         [JSInvokable]
         public static void InvokeKeyUp(int e)
         {
-           // Console.WriteLine("c# invoked onkeyup - "+ e);
             ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), e.ToString());
           
             OnKeyUp?.Invoke(consoleKey);
@@ -34,10 +32,6 @@ namespace BlazorWindowHelper
             OnResize?.Invoke();
         }
 
-        //[JSInvokable]
-        //public static void InvokeOnUrlChange(string Par_URL)
-        //{
-        //    OnUrlChange?.Invoke(Par_URL);
-        //}
+
     }
 }

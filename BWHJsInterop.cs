@@ -25,5 +25,11 @@ namespace BlazorWindowHelper
                 "BWHJsFunctions.log", message);
 
         }
+        public static Task<bool> LogWithTime(string message)
+        {
+            return JSRuntime.Current.InvokeAsync<bool>(
+                "BWHJsFunctions.logWithTime", message);
+
+        }
     }
 }
