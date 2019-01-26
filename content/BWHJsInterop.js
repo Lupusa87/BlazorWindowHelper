@@ -1,9 +1,12 @@
 
+var OnOrOff = false;
+
 document.onkeyup = function (evt) {
-    evt = evt || window.event;
 
-    DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeKeyUp', evt.keyCode);
-
+    if (OnOrOff===true) {
+        evt = evt || window.event;
+        DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeKeyUp', evt.keyCode);
+    }
 };
 
 
@@ -12,15 +15,15 @@ window.addEventListener("resize", onResize, false);
 
 
 function onScroll() {
-
-    DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeOnScroll');
-
+    if (OnOrOff === true) {
+        DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeOnScroll');
+    }
 }
 
 function onResize() {
-
-    DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeOnResize');
-
+    if (OnOrOff === true) {
+        DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeOnResize');
+    }
 }
 
 
@@ -39,5 +42,11 @@ window.BWHJsFunctions = {
     logWithTime: function (message) {
         console.log(getTime() +" " + message);
         return true;
-    }
+    },
+    setOnOrOff: function (b) {
+        console.log(b);
+        OnOrOff = b;
+        console.log(OnOrOff);
+        return true;
+    },
 };

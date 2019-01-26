@@ -1,4 +1,5 @@
 using Microsoft.JSInterop;
+using System;
 using System.Threading.Tasks;
 
 namespace BlazorWindowHelper
@@ -19,17 +20,28 @@ namespace BlazorWindowHelper
                 "BWHJsFunctions.alert",message);
             
         }
+
         public static Task<bool> Log(string message)
         {
             return JSRuntime.Current.InvokeAsync<bool>(
                 "BWHJsFunctions.log", message);
 
         }
+
         public static Task<bool> LogWithTime(string message)
         {
             return JSRuntime.Current.InvokeAsync<bool>(
                 "BWHJsFunctions.logWithTime", message);
 
         }
+
+        public static Task<bool> SetOnOrOff(bool OnOrOff)
+        {
+
+            return JSRuntime.Current.InvokeAsync<bool>(
+                "BWHJsFunctions.setOnOrOff", OnOrOff);
+
+        }
+        
     }
 }
