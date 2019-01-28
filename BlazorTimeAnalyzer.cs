@@ -89,6 +89,8 @@ namespace BlazorWindowHelper
                 BWHJsInterop.Log(item.ID + "   " + item.Name + "   " + item.Description + "   " + item.Method + "   " + item.StartDate.ToString("HH:mm:ss.fff") + "   " + item.EndDate.ToString("HH:mm:ss.fff") + "   " + item.Duration.ToString(@"hh\:mm\:ss\.fff") + "   " + item.Percentage + "%");
             }
             BWHJsInterop.Log("==========================================");
+
+            Reset();
         }
 
 
