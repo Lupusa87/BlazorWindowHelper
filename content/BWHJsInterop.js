@@ -44,9 +44,7 @@ window.BWHJsFunctions = {
         return true;
     },
     setOnOrOff: function (b) {
-        console.log(b);
         OnOrOff = b;
-        console.log(OnOrOff);
         return true;
     },
 };

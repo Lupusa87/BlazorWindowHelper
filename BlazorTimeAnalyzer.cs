@@ -8,6 +8,11 @@ namespace BlazorWindowHelper
 {
     public static class BlazorTimeAnalyzer
     {
+        /// <summary>
+        /// If this is set to true all added item will be loged,
+        /// it is useful in case of error we will know what was last added step and identify error source easier. 
+        /// </summary>
+        public static bool LogAllAdd { get; set; } = false;
 
         private static List<TimeTask> list = new List<TimeTask>();
 
@@ -30,6 +35,11 @@ namespace BlazorWindowHelper
             };
 
             list.Add(t);
+
+            if (LogAllAdd)
+            {
+                BWHJsInterop.Log("added new TimeAnalyzer item - " + t.ID + "   " + t.Name + "   " + t.Description + "   " + t.Method + "   " + t.StartDate.ToString("HH:mm:ss.fff"));
+            }
         }
 
 
@@ -79,18 +89,25 @@ namespace BlazorWindowHelper
 
         public static void Log()
         {
-            Calculate();
-
-
-            BWHJsInterop.Log("=============== time report ==============");
-            BWHJsInterop.Log("N === Name === Description === Method === Start === End === Duration === Percentage");
-            foreach (var item in list)
+            if (list.Any())
             {
-                BWHJsInterop.Log(item.ID + "   " + item.Name + "   " + item.Description + "   " + item.Method + "   " + item.StartDate.ToString("HH:mm:ss.fff") + "   " + item.EndDate.ToString("HH:mm:ss.fff") + "   " + item.Duration.ToString(@"hh\:mm\:ss\.fff") + "   " + item.Percentage + "%");
-            }
-            BWHJsInterop.Log("==========================================");
+                Calculate();
 
-            Reset();
+
+                BWHJsInterop.Log("=============== time report ==============");
+                BWHJsInterop.Log("N === Name === Description === Method === Start === End === Duration === Percentage");
+                foreach (var item in list)
+                {
+                    BWHJsInterop.Log(item.ID + "   " + item.Name + "   " + item.Description + "   " + item.Method + "   " + item.StartDate.ToString("HH:mm:ss.fff") + "   " + item.EndDate.ToString("HH:mm:ss.fff") + "   " + item.Duration.ToString(@"hh\:mm\:ss\.fff") + "   " + item.Percentage + "%");
+                }
+                BWHJsInterop.Log("=============== report end ==============");
+
+                Reset();
+            }
+            else
+            {
+                BWHJsInterop.Log("===!!! Was called log method but list is empty !!!===");
+            }
         }
 
 
