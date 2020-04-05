@@ -117,16 +117,16 @@ namespace BlazorWindowHelper
         }
     }
 
-    public class TimeTask
+    internal class TimeTask
     {
-        public int ID { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public TimeSpan Duration { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Method { get; set; }
-        public double Percentage { get; set; }
+        internal int ID { get; set; }
+        internal DateTime StartDate { get; set; }
+        internal DateTime EndDate { get; set; }
+        internal TimeSpan Duration { get; set; }
+        internal string Name { get; set; }
+        internal string Description { get; set; }
+        internal string Method { get; set; }
+        internal double Percentage { get; set; }
 
     }
 

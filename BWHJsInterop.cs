@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
@@ -6,39 +7,44 @@ namespace BlazorWindowHelper
 {
     public class BWHJsInterop
     {
-        public static Task<string> Prompt(string message)
+
+        public static IJSRuntime jsRuntime { get; set; }
+
+        public static bool IsReady { get; set; }
+
+        public static ValueTask<string> Prompt(string message)
         {
            
-            return JSRuntime.Current.InvokeAsync<string>(
+            return jsRuntime.InvokeAsync<string>(
                 "BWHJsFunctions.showPrompt",
                 message);
         }
 
-        public static Task<bool> Alert(string message)
+        public static ValueTask<bool> Alert(string message)
         {
-            return JSRuntime.Current.InvokeAsync<bool>(
+            return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.alert",message);
             
         }
 
-        public static Task<bool> Log(string message)
+        public static ValueTask<bool> Log(string message)
         {
-            return JSRuntime.Current.InvokeAsync<bool>(
+            return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.log", message);
 
         }
 
-        public static Task<bool> LogWithTime(string message)
+        public static ValueTask<bool> LogWithTime(string message)
         {
-            return JSRuntime.Current.InvokeAsync<bool>(
+            return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.logWithTime", message);
 
         }
 
-        public static Task<bool> SetOnOrOff(bool OnOrOff)
+        public static ValueTask<bool> SetOnOrOff(bool OnOrOff)
         {
 
-            return JSRuntime.Current.InvokeAsync<bool>(
+            return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.setOnOrOff", OnOrOff);
 
         }
