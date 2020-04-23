@@ -35,7 +35,7 @@ window.BWHJsFunctions = {
         alert(message);
         return true;
     },
-    log: function (message) {
+    mylog: function (message) {
         console.log(message);
         return true;
     },

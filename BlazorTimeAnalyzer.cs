@@ -12,36 +12,77 @@ namespace BlazorWindowHelper
         /// If this is set to true all added item will be loged,
         /// it is useful in case of error we will know what was last added step and identify error source easier. 
         /// </summary>
-        public static bool LogAllAdd { get; set; } = false;
+        public static bool LogAllAddition { get; set; } = false;
+
+        public static bool DevelopmentMode { get; set; } = true;
 
         private static List<TimeTask> list = new List<TimeTask>();
 
         public static void Reset()
         {
+
+            if (!DevelopmentMode)
+                return;
+
             list = new List<TimeTask>();
         }
 
 
         public static void Add(string Par_Name, MethodBase Par_Method, string Par_Description = "NA")
         {
+            if (!DevelopmentMode)
+                return;
 
             TimeTask t = new TimeTask
             {
                 ID = list.Count + 1,
                 Name = Par_Name,
                 Description = Par_Description,
-                Method = getMethod(Par_Method),
+                Method = getMethodName(Par_Method),
                 StartDate = DateTime.Now,
             };
 
             list.Add(t);
 
-            if (LogAllAdd)
+            if (LogAllAddition)
             {
-                BWHJsInterop.Log("added new TimeAnalyzer item - " + t.ID + "   " + t.Name + "   " + t.Description + "   " + t.Method + "   " + t.StartDate.ToString("HH:mm:ss.fff"));
+                BWHJsInterop.JsLog("added new TimeAnalyzer item - " + t.ID + "   " + t.Name + "   " + t.Description + "   " + t.Method + "   " + t.StartDate.ToString("HH:mm:ss.fff"));
             }
         }
 
+
+        public static void LogAll()
+        {
+
+            if (!DevelopmentMode)
+                return;
+
+            if (list.Any())
+            {
+                Calculate();
+
+
+                BWHJsInterop.JsLog("=============== time report ==============");
+                BWHJsInterop.JsLog("N === Name === Description === Method === Start === End === Duration === Percentage");
+                foreach (var item in list)
+                {
+                    BWHJsInterop.JsLog(item.ID + "   " + item.Name + "   " + item.Description + "   " + item.Method + "   " + item.StartDate.ToString("HH:mm:ss.fff") + "   " + item.EndDate.ToString("HH:mm:ss.fff") + "   " + item.Duration.ToString(@"hh\:mm\:ss\.fff") + "   " + item.Percentage + "%");
+                }
+                BWHJsInterop.JsLog("=============== report end ==============");
+
+                Reset();
+            }
+            else
+            {
+                BWHJsInterop.JsLog("===!!! Was called log method but list is empty !!!===");
+            }
+        }
+
+
+        private static string getMethodName(MethodBase Par_Method)
+        {
+            return Par_Method.Name + "." + Par_Method.DeclaringType.FullName;
+        }
 
         private static void Calculate()
         {
@@ -84,36 +125,6 @@ namespace BlazorWindowHelper
                 Duration = list.Max(x => x.EndDate) - list.Min(x => x.StartDate),
                 Percentage = 100.0,
             });
-        }
-
-
-        public static void Log()
-        {
-            if (list.Any())
-            {
-                Calculate();
-
-
-                BWHJsInterop.Log("=============== time report ==============");
-                BWHJsInterop.Log("N === Name === Description === Method === Start === End === Duration === Percentage");
-                foreach (var item in list)
-                {
-                    BWHJsInterop.Log(item.ID + "   " + item.Name + "   " + item.Description + "   " + item.Method + "   " + item.StartDate.ToString("HH:mm:ss.fff") + "   " + item.EndDate.ToString("HH:mm:ss.fff") + "   " + item.Duration.ToString(@"hh\:mm\:ss\.fff") + "   " + item.Percentage + "%");
-                }
-                BWHJsInterop.Log("=============== report end ==============");
-
-                Reset();
-            }
-            else
-            {
-                BWHJsInterop.Log("===!!! Was called log method but list is empty !!!===");
-            }
-        }
-
-
-        public static string getMethod(MethodBase Par_Method)
-        {
-            return Par_Method.Name + "." + Par_Method.DeclaringType.FullName;
         }
     }
 

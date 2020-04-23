@@ -27,10 +27,11 @@ namespace BlazorWindowHelper
             
         }
 
-        public static ValueTask<bool> Log(string message)
+
+        public static ValueTask<bool> JsLog(string message)
         {
             return jsRuntime.InvokeAsync<bool>(
-                "BWHJsFunctions.log", message);
+                "BWHJsFunctions.mylog", message);
 
         }
 
