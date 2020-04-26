@@ -14,12 +14,24 @@ namespace BlazorWindowHelper
         /// </summary>
         public static bool LogAllAddition { get; set; } = false;
 
+        public static string ReportName { get; set; } = string.Empty;
+
+
         public static bool DevelopmentMode { get; set; } = true;
 
         private static List<TimeTask> list = new List<TimeTask>();
 
-        public static void Reset()
+        public static void Reset(string reportName="")
         {
+
+            if (!string.IsNullOrEmpty(reportName))
+            {
+                ReportName = reportName.ToUpper();
+            }
+            else
+            {
+                ReportName = string.Empty;
+            }
 
             if (!DevelopmentMode)
                 return;
@@ -62,7 +74,7 @@ namespace BlazorWindowHelper
                 Calculate();
 
 
-                BWHJsInterop.JsLog("=============== time report ==============");
+                BWHJsInterop.JsLog("=============== time report - " + ReportName+ " ==============");
                 BWHJsInterop.JsLog("N === Name === Description === Method === Start === End === Duration === Percentage");
                 foreach (var item in list)
                 {
