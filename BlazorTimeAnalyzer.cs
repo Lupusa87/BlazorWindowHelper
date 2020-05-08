@@ -50,7 +50,7 @@ namespace BlazorWindowHelper
                 ID = list.Count + 1,
                 Name = Par_Name,
                 Description = Par_Description,
-                Method = getMethodName(Par_Method),
+                Method = BWHelperFunctions.getMethodName(Par_Method),
                 StartDate = DateTime.Now,
             };
 
@@ -91,10 +91,7 @@ namespace BlazorWindowHelper
         }
 
 
-        private static string getMethodName(MethodBase Par_Method)
-        {
-            return Par_Method.Name + "." + Par_Method.DeclaringType.FullName;
-        }
+       
 
         private static void Calculate()
         {

@@ -12,6 +12,15 @@ namespace BlazorWindowHelper
 
         public static bool IsReady { get; set; }
 
+
+        public static void CheckHasjsRuntime()
+        {
+            if (jsRuntime is null)
+            {
+                throw new Exception("BlazorWindowHelper BWHJsInterop jsRuntime is null! please inject it.");
+            }
+        }
+
         public static ValueTask<string> Prompt(string message)
         {
 
@@ -31,6 +40,15 @@ namespace BlazorWindowHelper
                 "BWHJsFunctions.alert",message);
             
         }
+
+
+        public static ValueTask SetFocus(string id)
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeVoidAsync(
+                "BWHJsFunctions.SetFocus", id);
+        }
+
 
 
         public static ValueTask<bool> JsLog(string message)
@@ -61,15 +79,68 @@ namespace BlazorWindowHelper
 
         }
 
-
-
-        public static void CheckHasjsRuntime()
+        public static ValueTask<int> GetTimezoneOffset()
         {
-            if (jsRuntime is null)
-            {
-                throw new Exception("BlazorWindowHelper BWHJsInterop jsRuntime is null! please inject it.");
-            }
+            CheckHasjsRuntime();
+
+            return jsRuntime.InvokeAsync<int>(
+                "BWHJsFunctions.GetTimezoneOffset");
         }
+
+        public static ValueTask<long> GetDateMilliseconds()
+        {
+            CheckHasjsRuntime();
+
+            return jsRuntime.InvokeAsync<long>(
+                "BWHJsFunctions.GetDateMilliseconds");
+        }
+
+        public static ValueTask<double> GetElementActualWidth(string elementID)
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<double>(
+                "BWHJsFunctions.GetElementActualWidth", elementID);
+        }
+
+        public static ValueTask<double> GetElementActualHeight(string elementID)
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<double>(
+                "BWHJsFunctions.GetElementActualHeight", elementID);
+        }
+
+        public static ValueTask<double> GetElementActualTop(string elementID)
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<double>(
+                "BWHJsFunctions.GetElementActualTop", elementID);
+        }
+
+        public static ValueTask<double> GetElementActualLeft(string elementID)
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<double>(
+                "BWHJsFunctions.GetElementActualLeft", elementID);
+        }
+
+
+        public static ValueTask<double> GetWindowWidth()
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<double>(
+                "BWHJsFunctions.GetWindowWidth");
+        }
+
+        public static ValueTask<double> GetWindowHeight()
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<double>(
+                "BWHJsFunctions.GetWindowHeight");
+        }
+
+
+
+
 
   }
 }
