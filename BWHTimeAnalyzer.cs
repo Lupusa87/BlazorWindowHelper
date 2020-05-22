@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorWindowHelper
 {
-    public static class BlazorTimeAnalyzer
+    public static class BWHTimeAnalyzer
     {
         /// <summary>
         /// If this is set to true all added item will be loged,

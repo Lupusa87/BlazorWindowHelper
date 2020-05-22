@@ -1,4 +1,3 @@
-
 var OnOrOff = false;
 
 document.onkeyup = function (evt) {
@@ -21,7 +20,7 @@ document.onkeydown = function (evt) {
 
 window.addEventListener("scroll", onScroll, false);
 window.addEventListener("resize", onResize, false);
-
+window.addEventListener("unload", onUnload, false);
 
 function onScroll() {
     if (OnOrOff === true) {
@@ -35,6 +34,12 @@ function onResize() {
     }
 }
 
+function onUnload() {
+    if (OnOrOff === true) {
+        console.log("unloading from js");
+        DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeOnUnload');
+    }
+}
 
 window.BWHJsFunctions = {
     showPrompt: function (message) {
@@ -115,5 +120,12 @@ window.BWHJsFunctions = {
             || document.documentElement.clientHeight
             || document.body.clientHeight;
 
+    },
+    SetItemLocalStorage: function (k, v) {
+        localStorage.setItem(k, v);
+        return true;
+    },
+    GetItemLocalStorage: function (k) {
+        return localStorage.getItem(k);
     }
 };

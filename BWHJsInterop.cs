@@ -139,8 +139,18 @@ namespace BlazorWindowHelper
         }
 
 
+        public static ValueTask<bool> LocalStorageSetItem(string key, string value)
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<bool>(
+                "BWHJsFunctions.SetItemLocalStorage", key, value);
+        }
 
-
-
-  }
+        public static ValueTask<string> LocalStorageGetItem(string key)
+        {
+            CheckHasjsRuntime();
+            return jsRuntime.InvokeAsync<string>(
+                "BWHJsFunctions.GetItemLocalStorage", key);
+        }
+    }
 }
