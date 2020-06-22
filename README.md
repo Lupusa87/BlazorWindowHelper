@@ -11,4 +11,7 @@ Please send [email](mailto:VakhtangiAbashidze@gmail.com) if you consider to **hi
 
 ![](https://placehold.it/15/ffffff/000000?text=+)  
 
-This repos has helpers for window events like scroll, resize, keyboard events on window level and some another useful stuff.
+This repo has helpers for window level events like scroll, resize, keyboard events and some another useful stuff.
+
+
+Helper is available on [nuget](https://www.nuget.org/packages/BlazorWindowHelper)
