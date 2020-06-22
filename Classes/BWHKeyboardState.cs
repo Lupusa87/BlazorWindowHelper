@@ -14,7 +14,7 @@ namespace BlazorWindowHelper.Classes
 
         public bool alt { get; private set; }
 
-        public bool IsCurrentOrOld { get; private set; } //current menas key is down now, old means last state if it needed
+        public bool IsCurrentOrOld { get; private set; } //current means key is down now, old means last state if it needed
 
         public BWHKeyboardState(ConsoleKey pConsoleKey, bool pCtrl, bool pShift, bool pAlt, bool pIsCurrentOrOld)
         {

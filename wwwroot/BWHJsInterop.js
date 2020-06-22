@@ -49,6 +49,10 @@ window.BWHJsFunctions = {
         alert(message);
         return true;
     },
+    Print: function () {
+        window.print();
+        return true;
+    },
     mylog: function (message) {
         console.log(message);
         return true;
@@ -127,5 +131,28 @@ window.BWHJsFunctions = {
     },
     GetItemLocalStorage: function (k) {
         return localStorage.getItem(k);
-    }
+    },
+    RemoveItemLocalStorage: function (k) {
+        var v = localStorage.getItem(k);
+        if (v === null) {
+            return false;
+        }
+        else {
+            localStorage.removeItem(k);
+            return true;
+        }
+    },
+    CheckIfKeyExistsLocalStorage: function (k) {
+        var v = localStorage.getItem(k);
+        if (v === null) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    },
+    ClearLocalStorage: function () {
+        localStorage.clear();
+        return true;
+    },
 };

@@ -26,7 +26,6 @@ namespace BlazorWindowHelper
         [JSInvokable]
         public static void InvokeOnUnload()
         {
-            Console.WriteLine("unloading from .net");
             OnUnload?.Invoke();
         }
 

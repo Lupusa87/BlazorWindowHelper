@@ -10,10 +10,8 @@ namespace BlazorWindowHelper
 
         public static IJSRuntime jsRuntime { get; set; }
 
-        public static bool IsReady { get; set; }
 
-
-        public static void CheckHasjsRuntime()
+        public static void CheckHasJsRuntime()
         {
             if (jsRuntime is null)
             {
@@ -24,7 +22,7 @@ namespace BlazorWindowHelper
         public static ValueTask<string> Prompt(string message)
         {
 
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
 
             return jsRuntime.InvokeAsync<string>(
                 "BWHJsFunctions.showPrompt",
@@ -34,7 +32,7 @@ namespace BlazorWindowHelper
         public static ValueTask<bool> Alert(string message)
         {
 
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
 
             return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.alert",message);
@@ -42,9 +40,19 @@ namespace BlazorWindowHelper
         }
 
 
+        public static ValueTask<bool> Print()
+        {
+
+            CheckHasJsRuntime();
+
+            return jsRuntime.InvokeAsync<bool>(
+                "BWHJsFunctions.Print");
+
+        }
+
         public static ValueTask SetFocus(string id)
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
             return jsRuntime.InvokeVoidAsync(
                 "BWHJsFunctions.SetFocus", id);
         }
@@ -53,7 +61,7 @@ namespace BlazorWindowHelper
 
         public static ValueTask<bool> JsLog(string message)
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
 
             return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.mylog", message);
@@ -63,7 +71,7 @@ namespace BlazorWindowHelper
         public static ValueTask<bool> LogWithTime(string message)
         {
 
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
 
             return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.logWithTime", message);
@@ -72,7 +80,7 @@ namespace BlazorWindowHelper
 
         public static ValueTask<bool> SetOnOrOff(bool OnOrOff)
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
 
             return jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.setOnOrOff", OnOrOff);
@@ -81,7 +89,7 @@ namespace BlazorWindowHelper
 
         public static ValueTask<int> GetTimezoneOffset()
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
 
             return jsRuntime.InvokeAsync<int>(
                 "BWHJsFunctions.GetTimezoneOffset");
@@ -89,7 +97,7 @@ namespace BlazorWindowHelper
 
         public static ValueTask<long> GetDateMilliseconds()
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
 
             return jsRuntime.InvokeAsync<long>(
                 "BWHJsFunctions.GetDateMilliseconds");
@@ -97,28 +105,28 @@ namespace BlazorWindowHelper
 
         public static ValueTask<double> GetElementActualWidth(string elementID)
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
             return jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualWidth", elementID);
         }
 
         public static ValueTask<double> GetElementActualHeight(string elementID)
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
             return jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualHeight", elementID);
         }
 
         public static ValueTask<double> GetElementActualTop(string elementID)
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
             return jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualTop", elementID);
         }
 
         public static ValueTask<double> GetElementActualLeft(string elementID)
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
             return jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualLeft", elementID);
         }
@@ -126,31 +134,19 @@ namespace BlazorWindowHelper
 
         public static ValueTask<double> GetWindowWidth()
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
             return jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetWindowWidth");
         }
 
         public static ValueTask<double> GetWindowHeight()
         {
-            CheckHasjsRuntime();
+            CheckHasJsRuntime();
             return jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetWindowHeight");
         }
 
 
-        public static ValueTask<bool> LocalStorageSetItem(string key, string value)
-        {
-            CheckHasjsRuntime();
-            return jsRuntime.InvokeAsync<bool>(
-                "BWHJsFunctions.SetItemLocalStorage", key, value);
-        }
-
-        public static ValueTask<string> LocalStorageGetItem(string key)
-        {
-            CheckHasjsRuntime();
-            return jsRuntime.InvokeAsync<string>(
-                "BWHJsFunctions.GetItemLocalStorage", key);
-        }
+       
     }
 }
