@@ -26,5 +26,15 @@ namespace BlazorWindowHelper
         {
             return Par_Method.Name + "." + Par_Method.DeclaringType.FullName;
         }
+
+
+
+        public static void CheckHasJsRuntime()
+        {
+            if (BWHWindowHelper.jsRuntime is null)
+            {
+                throw new Exception("BlazorWindowHelper BWHJsInterop jsRuntime is null! please inject it.");
+            }
+        }
     }
 }

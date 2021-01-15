@@ -2,7 +2,7 @@ var OnOrOff = false;
 
 document.onkeyup = function (evt) {
 
-    if (OnOrOff===true) {
+    if (OnOrOff === true) {
         evt = evt || window.event;
         DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeKeyUp', [evt.keyCode, evt.ctrlKey, evt.shiftKey, evt.altKey]);
     }
@@ -18,9 +18,13 @@ document.onkeydown = function (evt) {
 };
 
 
+document.addEventListener('visibilitychange', onVisibilityChange, false);
+
+
 window.addEventListener("scroll", onScroll, false);
 window.addEventListener("resize", onResize, false);
 window.addEventListener("unload", onUnload, false);
+
 
 function onScroll() {
     if (OnOrOff === true) {
@@ -36,14 +40,24 @@ function onResize() {
 
 function onUnload() {
     if (OnOrOff === true) {
-        console.log("unloading from js");
         DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeOnUnload');
+    }
+}
+
+
+function onVisibilityChange() {
+    if (OnOrOff === true) {
+            DotNet.invokeMethodAsync('BlazorWindowHelper', 'InvokeOnVisibilityChange', !document.hidden);
     }
 }
 
 window.BWHJsFunctions = {
     showPrompt: function (message) {
     return prompt(message, 'Type anything here');
+    },
+    ClearConsole: function (message) {
+        console.clear();
+        return true;
     },
     alert: function (message) {
         alert(message);
@@ -86,7 +100,6 @@ window.BWHJsFunctions = {
         }
     },
     GetElementActualHeight: function (el) {
-
         if (document.getElementById(el) !== null) {
             let rect = document.getElementById(el).getBoundingClientRect();
             return rect.height;
@@ -111,6 +124,26 @@ window.BWHJsFunctions = {
         }
         else {
             return 0;
+        }
+    },
+    SetElementTop: function (el, t) {
+        if (document.getElementById(el) !== null) {
+            document.getElementById(el).style.top = t + "px";
+        }
+    },
+    SetElementLeft: function (el, l) {
+        if (document.getElementById(el) !== null) {
+            document.getElementById(el).style.left =l+"px";
+        }
+    },
+    SetElementWidth: function (el, w) {
+        if (document.getElementById(el) !== null) {
+            document.getElementById(el).style.width = w + "px";
+        }
+    },
+    SetElementHeight: function (el, h) {
+        if (document.getElementById(el) !== null) {
+            document.getElementById(el).style.height = h + "px";
         }
     },
     GetWindowWidth: function () {

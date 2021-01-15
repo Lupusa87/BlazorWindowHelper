@@ -8,23 +8,13 @@ namespace BlazorWindowHelper
     public class BWHJsInterop
     {
 
-        public static IJSRuntime jsRuntime { get; set; }
-
-
-        public static void CheckHasJsRuntime()
-        {
-            if (jsRuntime is null)
-            {
-                throw new Exception("BlazorWindowHelper BWHJsInterop jsRuntime is null! please inject it.");
-            }
-        }
 
         public static ValueTask<string> Prompt(string message)
         {
 
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<string>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<string>(
                 "BWHJsFunctions.showPrompt",
                 message);
         }
@@ -32,9 +22,9 @@ namespace BlazorWindowHelper
         public static ValueTask<bool> Alert(string message)
         {
 
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<bool>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.alert",message);
             
         }
@@ -43,17 +33,17 @@ namespace BlazorWindowHelper
         public static ValueTask<bool> Print()
         {
 
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<bool>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.Print");
 
         }
 
         public static ValueTask SetFocus(string id)
         {
-            CheckHasJsRuntime();
-            return jsRuntime.InvokeVoidAsync(
+            BWHelperFunctions.CheckHasJsRuntime();
+            return BWHWindowHelper.jsRuntime.InvokeVoidAsync(
                 "BWHJsFunctions.SetFocus", id);
         }
 
@@ -61,9 +51,9 @@ namespace BlazorWindowHelper
 
         public static ValueTask<bool> JsLog(string message)
         {
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<bool>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.mylog", message);
 
         }
@@ -71,78 +61,113 @@ namespace BlazorWindowHelper
         public static ValueTask<bool> LogWithTime(string message)
         {
 
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<bool>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.logWithTime", message);
 
         }
 
         public static ValueTask<bool> SetOnOrOff(bool OnOrOff)
         {
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<bool>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<bool>(
                 "BWHJsFunctions.setOnOrOff", OnOrOff);
 
         }
 
         public static ValueTask<int> GetTimezoneOffset()
         {
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<int>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<int>(
                 "BWHJsFunctions.GetTimezoneOffset");
         }
 
         public static ValueTask<long> GetDateMilliseconds()
         {
-            CheckHasJsRuntime();
+            BWHelperFunctions.CheckHasJsRuntime();
 
-            return jsRuntime.InvokeAsync<long>(
+            return BWHWindowHelper.jsRuntime.InvokeAsync<long>(
                 "BWHJsFunctions.GetDateMilliseconds");
         }
 
         public static ValueTask<double> GetElementActualWidth(string elementID)
         {
-            CheckHasJsRuntime();
-            return jsRuntime.InvokeAsync<double>(
+            BWHelperFunctions.CheckHasJsRuntime();
+            return BWHWindowHelper.jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualWidth", elementID);
         }
 
         public static ValueTask<double> GetElementActualHeight(string elementID)
         {
-            CheckHasJsRuntime();
-            return jsRuntime.InvokeAsync<double>(
+            BWHelperFunctions.CheckHasJsRuntime();
+            return BWHWindowHelper.jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualHeight", elementID);
         }
 
         public static ValueTask<double> GetElementActualTop(string elementID)
         {
-            CheckHasJsRuntime();
-            return jsRuntime.InvokeAsync<double>(
+            BWHelperFunctions.CheckHasJsRuntime();
+            return BWHWindowHelper.jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualTop", elementID);
         }
 
         public static ValueTask<double> GetElementActualLeft(string elementID)
         {
-            CheckHasJsRuntime();
-            return jsRuntime.InvokeAsync<double>(
+            BWHelperFunctions.CheckHasJsRuntime();
+            return BWHWindowHelper.jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetElementActualLeft", elementID);
+        }
+   
+        public static void ClearConsole()
+        {
+            BWHelperFunctions.CheckHasJsRuntime();
+            BWHWindowHelper.jsRuntime.InvokeVoidAsync(
+                "BWHJsFunctions.ClearConsole");
         }
 
 
+        public static void SetElementTop(string elementID, int t)
+        {
+            BWHelperFunctions.CheckHasJsRuntime();
+            BWHWindowHelper.jsRuntime.InvokeVoidAsync(
+                "BWHJsFunctions.SetElementTop", elementID, t);
+        }
+
+        public static void SetElementLeft(string elementID, int l)
+        {
+            BWHelperFunctions.CheckHasJsRuntime();
+            BWHWindowHelper.jsRuntime.InvokeVoidAsync(
+                "BWHJsFunctions.SetElementLeft", elementID, l);
+        }
+
+        public static void SetElementWidth(string elementID, int w)
+        {
+            BWHelperFunctions.CheckHasJsRuntime();
+            BWHWindowHelper.jsRuntime.InvokeVoidAsync(
+                "BWHJsFunctions.SetElementWidth", elementID, w);
+        }
+
+        public static void SetElementHeight(string elementID, int h)
+        {
+            BWHelperFunctions.CheckHasJsRuntime();
+            BWHWindowHelper.jsRuntime.InvokeVoidAsync(
+                "BWHJsFunctions.SetElementHeight", elementID, h);
+        }
+
         public static ValueTask<double> GetWindowWidth()
         {
-            CheckHasJsRuntime();
-            return jsRuntime.InvokeAsync<double>(
+            BWHelperFunctions.CheckHasJsRuntime();
+            return BWHWindowHelper.jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetWindowWidth");
         }
 
         public static ValueTask<double> GetWindowHeight()
         {
-            CheckHasJsRuntime();
-            return jsRuntime.InvokeAsync<double>(
+            BWHelperFunctions.CheckHasJsRuntime();
+            return BWHWindowHelper.jsRuntime.InvokeAsync<double>(
                 "BWHJsFunctions.GetWindowHeight");
         }
 

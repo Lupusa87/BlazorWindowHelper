@@ -9,11 +9,11 @@ namespace BlazorWindowHelper
     public static class BWHKeyboardHelper
     {
 
-        public static BWHKeyboardState keyboardState;
+        public static BWHKeyboardState keyboardState=new BWHKeyboardState(ConsoleKey.Escape, false,false,false,false);
 
-        public static Action<BWHKeyboardState> OnKeyUp { get; set; }
+        public static event Action<BWHKeyboardState> OnKeyUp;
 
-        public static Action<BWHKeyboardState> OnKeyDown { get; set; }
+        public static event Action<BWHKeyboardState> OnKeyDown;
 
         [JSInvokable]
         public static void InvokeKeyDown(object args)
